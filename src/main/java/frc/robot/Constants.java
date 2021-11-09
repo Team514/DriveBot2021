@@ -18,10 +18,10 @@ public final class Constants {
   /**
    * Motor controller Mapping
    */
-  public static int driveMotor_LeftPrimary = 0;
-  public static int driveMotor_LeftSecondary = 1;
-  public static int driveMotor_RightPrimary = 2;
-  public static int driveMotor_RightSecondary = 3;
+  public static int driveMotor_LeftPrimary = 2;
+  public static int driveMotor_LeftSecondary = 3;
+  public static int driveMotor_RightPrimary = 0;
+  public static int driveMotor_RightSecondary = 1;
 
   /**
    * Controller Input Device Mapping
