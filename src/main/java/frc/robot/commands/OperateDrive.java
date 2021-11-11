@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveUtil;
 
 public class OperateDrive extends CommandBase {
@@ -29,14 +29,13 @@ public class OperateDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // Get the X/Y values from the Joysticks
-    double leftX = Robot.robotContainer.getLeftJoystickX();
-    double leftY = Robot.robotContainer.getLeftJoystickY();
-    double rightX = Robot.robotContainer.getRightJoystickX();
-    double rightY = Robot.robotContainer.getRightJoystickY();
-
     // Tell DriveUtil to set the drive motors based on the Joystick's values
-    driveUtil.driveRobot(leftX, leftY, rightX, rightY);
+    driveUtil.driveRobot(
+      RobotContainer.getLeftJoystickX(),
+      RobotContainer.getLeftJoystickY(),
+      RobotContainer.getRightJoystickX(),
+      RobotContainer.getRightJoystickY()
+    );
   }
 
   // Called once the command ends or is interrupted.

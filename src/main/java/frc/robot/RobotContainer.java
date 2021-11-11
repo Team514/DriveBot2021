@@ -26,7 +26,7 @@ public class RobotContainer {
   private final OperateDrive operateDrive = new OperateDrive(driveUtil);
 
   // Joysticks and controllers
-  private final Joystick leftJoystick, rightJoystick;
+  private static Joystick leftJoystick, rightJoystick;
 
   // JoystickButton objects
   private JoystickButton toggleDriveMode;
@@ -64,19 +64,19 @@ public class RobotContainer {
     driveUtil.setDefaultCommand(operateDrive);
   }
 
-  public double getLeftJoystickX() {
+  public static double getLeftJoystickX() {
     return leftJoystick.getX();
   }
 
-  public double getLeftJoystickY() {
+  public static double getLeftJoystickY() {
     return leftJoystick.getY();
   }
 
-  public double getRightJoystickX() {
+  public static double getRightJoystickX() {
     return rightJoystick.getX();
   }
 
-  public double getRightJoystickY() {
+  public static double getRightJoystickY() {
     return rightJoystick.getY();
   }
 
