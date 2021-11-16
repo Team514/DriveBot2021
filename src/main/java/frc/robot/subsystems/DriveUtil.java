@@ -33,7 +33,9 @@ public class DriveUtil extends SubsystemBase {
     rightSecondary.follow(rightPrimary);
 
     // Invert secondaries (since they're on the opposite side of the robot)
+    leftPrimary.setInverted(true);
     leftSecondary.setInverted(true);
+    rightPrimary.setInverted(true);
     rightSecondary.setInverted(true);
 
     // Initialize DifferentialDrive controller
@@ -67,7 +69,7 @@ public class DriveUtil extends SubsystemBase {
       differentialDrive.arcadeDrive(rightX, rightY);
     } else if (driveMode.equals(DriveMode.TANK)) {
       // If we're in TANK mode, use tankDrive
-      differentialDrive.tankDrive(leftX, rightX);
+      differentialDrive.tankDrive(leftY, rightY);
     }
   }
 
