@@ -66,7 +66,7 @@ public class DriveUtil extends SubsystemBase {
   public void driveRobot(double leftX, double leftY, double rightX, double rightY) {
     if (driveMode.equals(DriveMode.ARCADE)) {
       // If we're in ARCADE mode, use arcadeDrive
-      differentialDrive.arcadeDrive(rightX, rightY);
+      differentialDrive.arcadeDrive(rightY, rightX);
     } else if (driveMode.equals(DriveMode.TANK)) {
       // If we're in TANK mode, use tankDrive
       differentialDrive.tankDrive(leftY, rightY);
