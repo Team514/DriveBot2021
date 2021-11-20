@@ -32,7 +32,7 @@ public class DriveUtil extends SubsystemBase {
     leftSecondary.follow(leftPrimary);
     rightSecondary.follow(rightPrimary);
 
-    // Invert secondaries (since they're on the opposite side of the robot)
+    // Invert motors
     leftPrimary.setInverted(true);
     leftSecondary.setInverted(true);
     rightPrimary.setInverted(true);
