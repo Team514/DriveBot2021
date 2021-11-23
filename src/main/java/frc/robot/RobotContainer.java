@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.OperateDrive;
+import frc.robot.commands.OperateShot;
 import frc.robot.subsystems.DriveUtil;
+import frc.robot.subsystems.ShotUtil;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -21,15 +23,17 @@ import frc.robot.subsystems.DriveUtil;
 public class RobotContainer {
   // Subsystems
   private final DriveUtil driveUtil = new DriveUtil();
+  private final ShotUtil shotUtil = new ShotUtil();
 
   // Commands
   private final OperateDrive operateDrive = new OperateDrive(driveUtil);
+  // private final OperateShot operateShot = new OperateShot(shotUtil);
 
   // Joysticks and controllers
-  private static Joystick leftJoystick, rightJoystick;
+  private static Joystick leftJoystick, rightJoystick, controller;
 
   // JoystickButton objects
-  private JoystickButton toggleDriveMode;
+  private JoystickButton toggleDriveMode, runShotMotor;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -37,7 +41,7 @@ public class RobotContainer {
   public RobotContainer() {
     leftJoystick = new Joystick(Constants.leftJoystick);
     rightJoystick = new Joystick(Constants.rightJoystick);
-    // controller = new Joystick(Constants.controller);
+    controller = new Joystick(Constants.controller);
     
     // Configure the button bindings
     configureButtonBindings();
@@ -52,9 +56,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Initialize JoystickButton objects
     toggleDriveMode = new JoystickButton(rightJoystick, Constants.kJoystickButton1);
-
+    runShotMotor = new JoystickButton(controller, Constants.kAButtonNum);
     // Define what each JoystickButton does
     toggleDriveMode.whenPressed(new InstantCommand(() -> driveUtil.toggleDriveMode(), driveUtil));
+    runShotMotor.whenPressed(new InstantCommand(() -> shotUtil.toggleShotMotor(), shotUtil));
   }
 
   /**

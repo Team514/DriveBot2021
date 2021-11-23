@@ -22,7 +22,9 @@ public final class Constants {
   public static int driveMotor_LeftSecondary = 3;
   public static int driveMotor_RightPrimary = 0;
   public static int driveMotor_RightSecondary = 1;
-
+  // ShotUtil
+  public static int shotMotor1 = 7;
+  public static int shotMotor2 = 8;
   /**
    * Controller Input Device Mapping
    */
