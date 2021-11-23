@@ -30,14 +30,8 @@ public class OperateDrive extends CommandBase {
   @Override
   public void execute() {
     // Tell DriveUtil to set the drive motors based on the Joystick's values
-    driveUtil.driveRobot(
-      RobotContainer.getLeftJoystickX(),
-      RobotContainer.getLeftJoystickY(),
-      RobotContainer.getRightJoystickX(),
-      RobotContainer.getRightJoystickY()
-    );
+    driveUtil.driveRobot();
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
