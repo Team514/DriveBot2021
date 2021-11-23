@@ -4,7 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -32,6 +34,8 @@ public class RobotContainer {
   // Joysticks and controllers
   private static Joystick leftJoystick, rightJoystick, controller;
 
+  private static XboxController xbox;
+
   // JoystickButton objects
   private JoystickButton toggleDriveMode, runShotMotor;
 
@@ -42,6 +46,7 @@ public class RobotContainer {
     leftJoystick = new Joystick(Constants.leftJoystick);
     rightJoystick = new Joystick(Constants.rightJoystick);
     controller = new Joystick(Constants.controller);
+    xbox = new XboxController(Constants.controller);
     
     // Configure the button bindings
     configureButtonBindings();
@@ -84,6 +89,22 @@ public class RobotContainer {
   public static double getRightJoystickY() {
     return rightJoystick.getY();
   }
+
+  // -1.0 -> 0.0 -> 1.0
+
+  public static double getRightXboxTrigger() {
+    return xbox.getTriggerAxis(GenericHID.Hand.kRight);
+  }
+
+  public static double getLeftXboxTrigger() {
+    return xbox.getTriggerAxis(GenericHID.Hand.kLeft);
+  }
+
+  public static double getLeftXboxJoystickX() {
+    return xbox.getX(GenericHID.Hand.kLeft);
+  }
+
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

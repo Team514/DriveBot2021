@@ -7,19 +7,24 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.handlers.DriveMode;
 
 public class DriveUtil extends SubsystemBase {
   // Motor controllers
   private WPI_VictorSPX leftPrimary, leftSecondary, rightPrimary, rightSecondary;
 
+  // Speed
+  private double speed, xSpeed, left, right; 
+
   // Drive controller
   private DifferentialDrive differentialDrive;
 
   // DriveMode defaults to TANK
-  private DriveMode driveMode = DriveMode.TANK;
+  private DriveMode driveMode = DriveMode.XBOX;
 
   public DriveUtil() {
     // Initialize speed controllers (VictorSPX)
@@ -63,18 +68,45 @@ public class DriveUtil extends SubsystemBase {
    * @param rightX the right controller's X (forward-backward) value
    * @param rightY the right controller's Y (left-right) value
    */
-  public void driveRobot(double leftX, double leftY, double rightX, double rightY) {
-    if (driveMode.equals(DriveMode.ARCADE)) {
-      // If we're in ARCADE mode, use arcadeDrive
-      differentialDrive.arcadeDrive(rightY, rightX);
-    } else if (driveMode.equals(DriveMode.TANK)) {
-      // If we're in TANK mode, use tankDrive
-      differentialDrive.tankDrive(leftY, rightY);
+  public void driveRobot() {
+
+    switch (driveMode) {
+      case TANK:
+        differentialDrive.tankDrive(RobotContainer.getLeftJoystickY(), RobotContainer.getRightJoystickY());
+        break;
+      
+      case ARCADE:
+        differentialDrive.arcadeDrive(RobotContainer.getRightJoystickY(), RobotContainer.getRightJoystickX());
+        break;
+
+      case XBOX: 
+        speed = -RobotContainer.getRightXboxTrigger() + RobotContainer.getLeftXboxTrigger();
+        xSpeed = RobotContainer.getLeftXboxJoystickX();
+
+        left = xSpeed * speed;
+        right = xSpeed * speed * -1;
+
+
+
+
+        differentialDrive.tankDrive(left, right);
+        break;
+
+      default:
+        differentialDrive.tankDrive(0.0, 0.0);
+        break;
+
     }
   }
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("drive speed", speed);
+    SmartDashboard.putNumber("left speed", left);
+    SmartDashboard.putNumber("right speed", right);
     // This method will be called once per scheduler run
   }
+
+
+
 }

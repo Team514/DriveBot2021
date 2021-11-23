@@ -1,5 +1,5 @@
 package frc.robot.handlers;
 
 public enum DriveMode {
-    ARCADE, TANK
+    ARCADE, TANK, XBOX
 }
