@@ -6,6 +6,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -33,6 +36,7 @@ public class DriveUtil extends SubsystemBase {
     rightPrimary = new WPI_VictorSPX(Constants.driveMotor_RightPrimary);
     rightSecondary = new WPI_VictorSPX(Constants.driveMotor_RightSecondary);
 
+
     // Set secondaries to follow primaries
     leftSecondary.follow(leftPrimary);
     rightSecondary.follow(rightPrimary);
@@ -46,6 +50,7 @@ public class DriveUtil extends SubsystemBase {
     // Initialize DifferentialDrive controller
     differentialDrive = new DifferentialDrive(leftPrimary, rightPrimary);
   }
+
 
   public void toggleDriveMode() {
     if (driveMode.equals(DriveMode.ARCADE)) {
@@ -83,13 +88,11 @@ public class DriveUtil extends SubsystemBase {
         speed = -RobotContainer.getRightXboxTrigger() + RobotContainer.getLeftXboxTrigger();
         xSpeed = RobotContainer.getLeftXboxJoystickX();
 
-        left = xSpeed * speed;
-        right = xSpeed * speed * -1;
+        // left = xSpeed * speed;
+        // right = xSpeed * speed * -1;
 
 
-
-
-        differentialDrive.tankDrive(left, right);
+        differentialDrive.arcadeDrive(speed * 0.75, -xSpeed, true);
         break;
 
       default:
