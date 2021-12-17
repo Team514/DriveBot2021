@@ -11,9 +11,10 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.OperateCollector;
 import frc.robot.commands.OperateDrive;
 import frc.robot.commands.OperateShot;
-import frc.robot.subsystems.BallMagnetUtil;
+import frc.robot.subsystems.CollectorUtil;
 import frc.robot.subsystems.DriveUtil;
 import frc.robot.subsystems.ShotUtil;
 
@@ -28,12 +29,11 @@ public class RobotContainer {
   // Subsystems
   private final DriveUtil driveUtil = new DriveUtil();
   private final ShotUtil shotUtil = new ShotUtil();
-  private final BallMagnetUtil ballMagnetUtil = new BallMagnetUtil();
-
-
+  private final CollectorUtil collectorUtil = new CollectorUtil();
 
   // Commands
   private final OperateDrive operateDrive = new OperateDrive(driveUtil);
+  private final OperateCollector operateCollector = new OperateCollector(collectorUtil);
   // private final OperateShot operateShot = new OperateShot(shotUtil);
 
   // Joysticks and controllers
@@ -42,7 +42,7 @@ public class RobotContainer {
   private static XboxController xbox;
 
   // JoystickButton objects
-  private JoystickButton toggleDriveMode, runShotMotor, toggleBallMagnet;
+  private JoystickButton toggleDriveMode, runShotMotor, toggleCollector;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -67,11 +67,11 @@ public class RobotContainer {
     // Initialize JoystickButton objects
     toggleDriveMode = new JoystickButton(rightJoystick, Constants.kJoystickButton1);
     runShotMotor = new JoystickButton(xbox, Button.kA.value);
-    toggleBallMagnet = new JoystickButton(xbox, Button.kY.value);
+    toggleCollector = new JoystickButton(xbox, Button.kY.value);
     // Define what each JoystickButton does
     toggleDriveMode.whenPressed(new InstantCommand(() -> driveUtil.toggleDriveMode(), driveUtil));
     runShotMotor.whenPressed(new InstantCommand(() -> shotUtil.toggleShotMotor(), shotUtil));
-    toggleBallMagnet.whenPressed(new InstantCommand(() -> ballMagnetUtil.toggleBallMagnet(), ballMagnetUtil));
+    toggleCollector.whenPressed(new InstantCommand(() -> collectorUtil.toggleCollector(), collectorUtil));
   }
 
   /**
@@ -79,6 +79,7 @@ public class RobotContainer {
    */
   private void configureSubsystemDefaultCommands() {
     driveUtil.setDefaultCommand(operateDrive);
+    collectorUtil.setDefaultCommand(operateCollector);
   }
 
   public static double getLeftJoystickX() {

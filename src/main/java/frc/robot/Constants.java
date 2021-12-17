@@ -25,6 +25,13 @@ public final class Constants {
   // ShotUtil
   public static int shotMotor1 = 7;
   public static int shotMotor2 = 8;
+
+
+  //CollectorUtil
+  public static final int forwardSolenoid = 4;
+  public static final int reverseSolenoid = 3;
+  public static final int intakeMotor = 6;
+
   /**
    * Controller Input Device Mapping
    */
